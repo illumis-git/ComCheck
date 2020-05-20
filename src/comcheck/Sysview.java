@@ -10,7 +10,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.JScrollBar;
 
 public class Sysview extends JFrame{
-	data Cdata = new data();
+	Data Cdata = new Data();
 	public Sysview() {
 		setTitle("Com check");
 		getContentPane().setLayout(new GridLayout(3, 0, 0, 0));
