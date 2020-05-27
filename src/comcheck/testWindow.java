@@ -24,6 +24,7 @@ public class testWindow extends SigarCommandBase{
 	 */
 	public static void main(String[] args) throws Exception {
 		new Data().processCommand(args); //없으면 데이터출력안됨
+				
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -48,9 +49,11 @@ public class testWindow extends SigarCommandBase{
 	 */
 	private void initialize() {
 		Data Cdata = new Data();
+		Gpudata gpudata = new Gpudata();
+		gpudata.getGpu();
 		frmComcheck = new JFrame();
 		frmComcheck.setTitle("Comcheck");
-		frmComcheck.setBounds(100, 100, 450, 300);
+		frmComcheck.setBounds(100, 100, 500, 450);//실행시 GUI실행위치가 100, 100에서부터 500x450 사이즈로 실행됨
 		frmComcheck.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmComcheck.getContentPane().setLayout(new GridLayout(5, 0, 10, 10));
 		
@@ -88,11 +91,40 @@ public class testWindow extends SigarCommandBase{
 		JLabel lblNewLabel_6 = new JLabel("RAM 정보");
 		panel_2.add(lblNewLabel_6);
 		
+
 		JLabel lblNewLabel_7 = new JLabel("총 : " + Cdata.getTotalmem()+" / 사용중 : " + Cdata.getUsemem() + " / 사용가능 : " + Cdata.getFreemem());
 		panel_2.add(lblNewLabel_7);
 		
 		JLabel lblNewLabel_8 = new JLabel("전체 "+Cdata.getTotalmem()+" 중 " + Cdata.getUsemem()+"("+Cdata.getPercentmem()+") 사용중이며 " + Cdata.getFreemem()+"의 여유 메모리가 있습니다.");
 		panel_2.add(lblNewLabel_8);
+		
+		JPanel panel_3 = new JPanel();
+		frmComcheck.getContentPane().add(panel_3);
+		panel_3.setLayout(new GridLayout(4, 1, 0, 0));
+		
+		JLabel lblNewLabel_9 = new JLabel("GPU 정보");
+		panel_3.add(lblNewLabel_9);
+		
+		JPanel panel_4 = new JPanel();
+		panel_3.add(panel_4);
+		panel_4.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		
+		JLabel lblNewLabel_11 = new JLabel("제조사");
+		panel_4.add(lblNewLabel_11);
+		
+		JLabel lblNewLabel_10 = new JLabel(gpudata.getGpuname(0));
+		panel_4.add(lblNewLabel_10);
+		
+		JLabel lblNewLabel_12 = new JLabel(gpudata.getGpuname(1)+" "+gpudata.getGpuname(2)+" "+gpudata.getGpuname(3));
+		panel_3.add(lblNewLabel_12);
+		
+		JPanel panel_5 = new JPanel();
+		panel_3.add(panel_5);
+		panel_5.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		JLabel lblNewLabel_13 = new JLabel("현재 온도(C) : " + gpudata.getGpudata(0));
+		panel_5.add(lblNewLabel_13);
+		//주기적으로 데이터 갱신
 	}
 
 	@Override

@@ -47,7 +47,6 @@ public class Data extends SigarCommandBase {
 		setFreemem(String.valueOf(df.format((double)mem.getFree()/1000000000)));
 		setUsemem(String.valueOf(df.format((double)mem.getUsed()/1000000000)));
 		setPercentmem(String.valueOf(Math.round(((double)mem.getUsed()*100)/(double)mem.getTotal())));
-		System.out.println(getPercentmem());
 	}
 
 	public String getSyversion() {
@@ -150,4 +149,5 @@ public class Data extends SigarCommandBase {
 		Percentmem = percentmem + "%";
 	}
 	//여기까지 메모리부분
+	
 }
