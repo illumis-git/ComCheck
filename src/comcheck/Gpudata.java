@@ -15,7 +15,16 @@ public class Gpudata {
 	private String[] gpuname;
 	private String gpucoretemp;
 	DefaultTableModel model = new DefaultTableModel(new Object[] { "Value" }, 0);
-	private String[] gpudata; //0.gpu사용률, 1.GPU메모리사용량 GB 나온값/10, 3.알수없음 비디오엔진? 4.메모리사용률%
+	private String[] gpudata; //0.gpu사용률, 1.GPU메모리사용량, 3.알수없음 비디오엔진?브라우저 하드웨어가속 4.메모리사용중 /단위 퍼센트
+	private String gputemp;
+
+	public String getGputemp() {
+		return gputemp;
+	}
+
+	public void setGputemp(String gputemp) {
+		this.gputemp = gputemp;
+	}
 
 	public String getGpudata(int i) {
 		return gpudata[i];
@@ -46,6 +55,8 @@ public class Gpudata {
 		Components components = JSensors.get.components();
 
 		List<Gpu> gpus = components.gpus;
+		gpudata = new String[5];
+		
 		if (gpus != null) {
 			for (final Gpu gpu : gpus) {
 				setGpuname(gpu.name);
@@ -58,6 +69,7 @@ public class Gpudata {
 					for (final Temperature temp : temps) {
 						setGpucoretemp(String.valueOf(temp.value));
 						System.out.println(temp.name + ": " + temp.value + " C");
+						setGputemp(String.valueOf(temp.value));
 					}
 
 					// Print fan speed
@@ -66,19 +78,28 @@ public class Gpudata {
 						System.out.println(fan.name + ": " + fan.value + " RPM");
 
 					}
-					List<Load> loads = gpu.sensors.loads;int i=0;
+					List<Load> loads = gpu.sensors.loads;
+					int i=0;
+					
 					for (final Load load : loads) {
-						this.gpudata = new String[loads.size()];
 						
-						setGpudata(i,String.valueOf(load.value));
-						System.out.println(load.name + ": " + getGpudata(i) + " 이게뭐죠"+i);
+						System.out.println(load.name + ": " + load.value + " 이게뭐죠"+i);
+						String test = new String(load.value.toString());
+						
+						setGpudata(i,test);
+						
 						i++;
-						model.addRow(new String[] { load.value });
+						
 						
 					}
 
 				}
 			}
 		}
+	
+	}
+	public static void main (String[] args) {
+		Gpudata gdata = new Gpudata();
+		gdata.getGpu();
 	}
 }

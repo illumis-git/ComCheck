@@ -18,7 +18,7 @@ public class Data extends SigarCommandBase {
 	private static String Syarch; // OS아키텍처 x32 x64
 	private static String Sydatamodel;// OS데이터모델 32 64
 	private static String Ifvendor; // cpu제조사
-	private static String Ifmodel; // cpu제품명+동작속도
+	private static String[] Ifmodel; // cpu제품명+동작속도
 	private static String Totalmem; //총메모리
 	private static String Freemem; //남은메모리
 	private static String Usemem;  //사용중메모리
@@ -111,12 +111,12 @@ public class Data extends SigarCommandBase {
 		}
 	}
 
-	public String getIfmodel() {
-		return Ifmodel;
+	public String getIfmodel(int i) {
+		return Ifmodel[i];
 	}
 
 	public void setIfmodel(String ifmodel) {
-		Ifmodel = ifmodel.trim();
+		Ifmodel = ifmodel.trim().split(" @ ");
 	}
 	// 여기까지 CPU부분
 	public static String getTotalmem() {
