@@ -133,7 +133,7 @@ public class testWindow extends SigarCommandBase{
 		lblNewLabel_9.setVerticalAlignment(SwingConstants.TOP);
 		panel_3.add(lblNewLabel_9);
 		
-		
+		try {
 		JLabel lblNewLabel_10 = new JLabel("제조사: " + gpudata.getGpuname(0));
 		lblNewLabel_10.setVerticalAlignment(SwingConstants.TOP);
 		panel_3.add(lblNewLabel_10);
@@ -145,7 +145,11 @@ public class testWindow extends SigarCommandBase{
 		JLabel lblNewLabel_13 = new JLabel("현재 온도(C) : " + gpudata.getGputemp());
 		lblNewLabel_13.setVerticalAlignment(SwingConstants.TOP);
 		panel_3.add(lblNewLabel_13);
-		
+		} catch (NullPointerException NPE) {
+			JLabel lblNewLabel_10 = new JLabel("그래픽카드가 장착되어있지 않습니다.");
+			lblNewLabel_10.setVerticalAlignment(SwingConstants.TOP);
+			panel_3.add(lblNewLabel_10);
+		}
 		JPanel panel_4 = new JPanel();
 		tabbedPane.addTab("저장매체", null, panel_4, null);
 		panel_4.setLayout(new GridLayout(7, 0, 0, 0));
