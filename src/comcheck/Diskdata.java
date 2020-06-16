@@ -16,6 +16,15 @@ import com.profesorfalken.jsensors.model.sensors.Temperature;
 public class Diskdata {
 	private String[] diskname;
 	private String[] disktemp;
+	private int installeddisk;
+
+	public int getInstalleddisk() {
+		return installeddisk;
+	}
+
+	public void setInstalleddisk(int installeddisk) {
+		this.installeddisk = installeddisk;
+	}
 
 	public String getDisktemp(int k) {
 		return disktemp[k];
@@ -39,20 +48,18 @@ public class Diskdata {
 		Components components = JSensors.get.components();
 
 		List<Disk> disks = components.disks;
-diskname = new String[disks.size()];
-disktemp = new String[disks.size()];
+		diskname = new String[disks.size()];
+		disktemp = new String[disks.size()];
+		setInstalleddisk(disks.size());
 		if (disks != null) {
 
 			for (final Disk disk : disks) {
 				// System.out.println("Found CPU component: " + disk.name);
 				String disknametoString = new String(disk.name.toString());
-				
+
 				setDiskname(i, disknametoString);
-				//System.out.println("테스트" + getDiskname(i) + " 숫자값" + i);
-				//System.out.println("안나오는부분" + getDiskname(0) + i);
-				
-				
-				
+				// System.out.println("테스트" + getDiskname(i) + " 숫자값" + i);
+				// System.out.println("안나오는부분" + getDiskname(0) + i);
 
 				i++;
 				if (disk.sensors != null) {
