@@ -166,6 +166,8 @@ public class testWindow extends SigarCommandBase {
 			lblNewLabel_12.setVerticalAlignment(SwingConstants.TOP);
 			
 			JLabel label = new JLabel("GPU사용률 (%) : " + gpudata.getGpudata(0));
+			label.setFont(new Font("나눔고딕", Font.PLAIN, 14));
+			label.setVerticalAlignment(SwingConstants.TOP);
 			panel_4.add(label);
 
 			JLabel lblNewLabel_13 = new JLabel("현재 온도(C) : " + gpudata.getGputemp());
